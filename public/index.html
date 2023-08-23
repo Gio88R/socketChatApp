@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="script.js" defer></script>
-    <title>Socket.io</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Hello buddies</h1>
-    <div class="login">
-        <input type="text">
-        <button>Börja chatta</button>
-    </div>
-    <ul></ul>
-    
+  <div id="room-container"></div>
+  <form action="/room" method="POST">
+    <input name="room" type="text" required>
+    <button type="submit">New Room</button>
+  </form>
 </body>
 </html>
