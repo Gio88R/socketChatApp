@@ -40,11 +40,11 @@ io.on("connection", (socket) => {
     }
 
     rooms[room].users[socket.id] = name;
-    io.to(room).emit("user-connected", name);
+    socket.to(room).emit("user-connected", name);
   });
 
   socket.on("send-chat-message", (room, message) => {
-    io.to(room).emit("chat-message", {
+    socket.to(room).emit("chat-message", {
       message: message,
       name: rooms[room].users[socket.id],
     });
@@ -52,9 +52,7 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     getUserRooms(socket).forEach((room) => {
-      socket
-        .to(room)
-        .broadcast.emit("user-disconnected", rooms[room].users[socket.id]);
+      socket.to(room).emit("user-disconnected", rooms[room].users[socket.id]);
       delete rooms[room].users[socket.id];
     });
   });
