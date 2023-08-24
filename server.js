@@ -34,7 +34,7 @@ server.listen(3000);
 io.on("connection", (socket) => {
   socket.on("new-user", (room, name) => {
     socket.join(room);
-
+    displayRoomInfo();
     if (!rooms[room]) {
       rooms[room] = { users: {} };
     }
@@ -65,4 +65,15 @@ function getUserRooms(socket) {
     if (room.users[socket.id] != null) names.push(name);
     return names;
   }, []);
+}
+
+function displayRoomInfo() {
+  const rooms = io.sockets.adapter.rooms;
+  console.log("Room information:");
+  rooms.forEach((sockets, room) => {
+    console.log(
+      `Room ${room} has sockets: ${JSON.stringify(Array.from(sockets))}`
+    );
+  });
+  console.log("---");
 }
