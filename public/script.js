@@ -4,6 +4,8 @@ const roomContainer = document.getElementById("room-container");
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
 
+const roomName = window.location.pathname.slice(1); // Extract room name from the URL
+
 if (messageForm != null) {
   const name = prompt("What is your name?");
   appendMessage("You joined");

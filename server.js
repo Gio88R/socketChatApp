@@ -70,6 +70,7 @@ function getUserRooms(socket) {
 function displayRoomInfo() {
   const rooms = io.sockets.adapter.rooms;
   console.log("Room information:");
+  console.log(io.sockets.adapter.rooms);
   rooms.forEach((sockets, room) => {
     console.log(
       `Room ${room} has sockets: ${JSON.stringify(Array.from(sockets))}`
