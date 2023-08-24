@@ -9,11 +9,44 @@
 </head>
 <body>
     <h1>Hello buddies</h1>
-    <div class="login">
-        <input type="text">
-        <button>Börja chatta</button>
+
+<!--- Inlogg -->
+
+<h1>Inloggning</h1>
+    
+<div class="login">
+    <input type="text" />     
+    <button>Skapa användare</button>
+    <ul>
+        <li><p>hårdkodat användare finns inte</p></li>
+    </ul>
+</div>
+
+<hr>
+
+
+<!--- Lobbyn -->
+
+<h1>Lobby</h1>
+    <div class="chatroom">
+        <input type="text" />     
+        <button>Skapa rum</button>
+        <ul>
+            <li><p>hårdkodat rum finns inte</p></li>
+        </ul>
     </div>
-    <ul></ul>
+
+<hr>
+
+
+<!--- Chatten -->
+
+<h1>Chattruta</h1>
+    <div id="message-container"></div>
+    <form id="send-container">
+        <input type="text" id="message-input">
+        <button type="submit" id="send-button">Skicka</button>
+    </form>
     
 </body>
 </html>
