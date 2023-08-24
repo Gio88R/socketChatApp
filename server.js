@@ -7,7 +7,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const rooms = {};
-
+//test
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
