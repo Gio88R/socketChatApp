@@ -25,9 +25,9 @@ socket.on("room-created", (room) => {
   roomElement.innerText = room;
   const roomLink = document.createElement("a");
   roomLink.href = `/${room}`;
-  roomLink.innerText = "join";
+  roomLink.innerText = "Join Room";
   roomContainer.append(roomElement);
-  roomContainer.append(roomLink);
+  roomElement.append(roomLink);
 });
 
 socket.on("chat-message", (data) => {

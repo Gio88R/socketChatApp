@@ -1,18 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Chat App</title>
-  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
-  <script defer src="script.js"></script>
-</head>
-<body>
-  <div id="room-container"></div>
-  <form action="/room" method="POST">
-    <input name="room" type="text" required>
-    <button type="submit">New Room</button>
-  </form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat App</title>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Rubik:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      font-family: "Raleway", sans-serif;
+      font-family: "Rubik", sans-serif;
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2f4f4f;
+    }
+    h1 {
+      font-size: 48px;
+      color: lightgoldenrodyellow;
+    }
+    #room-container {
+      display: flex;
+    }
+    #test {
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
+    #room-container div {
+      width: 100%;
+      padding: 10px;
+      margin: 10px;
+      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: darkslategrey;
+      color: lightgoldenrodyellow;
+      font-family: "Raleway", sans-serif;
+      font-family: "Rubik", sans-serif;
+      border: 2px groove lightgoldenrodyellow;
+      border-radius: 5px;
+    }
+    #room-container div a {
+      margin: 10px;
+      text-decoration: none;
+      color: lightgreen;
+      border: 1px groove lightgreen;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    #room-container div a:hover {
+      transform: scale(1.1);
+    }
+    form {
+      display: flex;
+      gap: 10px;
+    }
+    input {
+      text-align: center;
+      font-size: 20px;
+      height: 40px;
+      width: 200px;
+      background-color: darkslategrey;
+      color: lightgoldenrodyellow;
+      border: 2px groove lightgoldenrodyellow;
+      font-family: "Raleway", sans-serif;
+      font-family: "Rubik", sans-serif;
+      border-radius: 5px;
+    }
+    button {
+      height: 46px;
+      width: 100px;
+      background-color: darkslategrey;
+      color: lightgoldenrodyellow;
+      font-family: "Raleway", sans-serif;
+      font-family: "Rubik", sans-serif;
+      border: 2px groove lightgoldenrodyellow;
+      border-radius: 5px;
+    }
+  </style>
+  <body>
+    <div id="test">
+      <h1>Socket.io Chat</h1>
+      <form action="/room" method="POST">
+        <input name="room" type="text" required placeholder="Enter room name" />
+        <button type="submit">Create Room</button>
+      </form>
+      <div id="room-container"></div>
+    </div>
+  </body>
 </html>
