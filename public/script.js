@@ -12,8 +12,8 @@ if (messageForm != null) {
   socket.emit("new-user", roomName, name);
 
   messageInput.addEventListener("keypress", () => {
-    socket.emit("typing", name)
-})
+      socket.emit("typing", name)
+  })
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -38,7 +38,7 @@ socket.on("chat-message", (data) => {
   appendMessage(`${data.name}: ${data.message}`);
 });
 
-socket.on("typing", (name) => {
+socket.on("typing-event", (name) => {
     appendMessage(`${name} is typing...`);
 });
 

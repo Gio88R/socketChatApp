@@ -53,15 +53,15 @@ io.on("connection", (socket) => {
     });
   });
 
+  // https://stackoverflow.com/questions/16766488/socket-io-how-to-check-if-user-is-typing-and-broadcast-it-to-other-users
   socket.on("typing", (name) => {
         if(typing == false) {
             typing = true
-            socket.broadcast.emit("typing", name)
-            timeout = setTimeout(timeoutFunction, 5000);
+            socket.broadcast.emit("typing-event", name)
+            timeout = setTimeout(timeoutFunction, 2500);
         }
     });
 
-  //https://stackoverflow.com/questions/16766488/socket-io-how-to-check-if-user-is-typing-and-broadcast-it-to-other-users
   socket.on("disconnect", () => {
     getUserRooms(socket).forEach((room) => {
       socket.to(room).emit("user-disconnected", rooms[room].users[socket.id]);
