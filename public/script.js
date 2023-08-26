@@ -18,6 +18,13 @@ if (messageForm != null) {
     socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
   });
+  const disconnect = document.getElementById("disconnect");
+  disconnect.addEventListener("click", () => {
+    if (confirm(`Are you sure you want to leave room ${roomName}?`)) {
+      socket.emit("leave-room", roomName);
+      window.location.href = "/";
+    }
+  });
 }
 
 socket.on("room-created", (room) => {

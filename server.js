@@ -56,6 +56,11 @@ io.on("connection", (socket) => {
       delete rooms[room].users[socket.id];
     });
   });
+  socket.on("leave-room", (roomName) => {
+    console.log(`${socket.id} left room ${roomName}`);
+    console.log(io.sockets.adapter.rooms);
+    socket.leave(roomName);
+  });
 });
 
 function getUserRooms(socket) {
