@@ -98,12 +98,13 @@
     }
   </style>
   <body>
-    <div id="login-container">
-      <h1>Socket.io Chat</h1>
-      <form id="login-form" action="/index" method="POST">
-        <input name="login-input" type="text" required placeholder="Enter name" />
-        <button type="submit">Login</button>
+    <div id="test">
+      <h1>Welcome</h1>
+      <form action="/room" method="POST">
+        <input name="room" type="text" required placeholder="Enter room name" />
+        <button type="submit">Create Room</button>
       </form>
+      <div id="room-container"></div>
     </div>
   </body>
 </html>

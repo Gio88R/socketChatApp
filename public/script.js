@@ -11,6 +11,7 @@ if (messageForm != null) {
   appendMessage("You joined");
   socket.emit("new-user", roomName, name);
 
+  //typing
   messageInput.addEventListener("keypress", () => {
       socket.emit("typing", name)
   })
@@ -23,6 +24,11 @@ if (messageForm != null) {
     messageInput.value = "";
   });
 }
+
+//lista på inloggade i chatten
+/* socket.on("updated-user-list", (usernames) => {
+    console.log(usernames);
+}) */
 
 socket.on("room-created", (room) => {
   const roomElement = document.createElement("div");
@@ -38,6 +44,7 @@ socket.on("chat-message", (data) => {
   appendMessage(`${data.name}: ${data.message}`);
 });
 
+//typing
 socket.on("typing-event", (name) => {
     appendMessage(`${name} is typing...`);
 });
@@ -55,15 +62,3 @@ function appendMessage(message) {
   messageElement.innerText = message;
   messageContainer.append(messageElement);
 }
-
-//vid inlogg, om ej ifyllt få error
-//https://webtips.dev/how-to-make-a-real-time-chat-app-with-socket-io
-//dom.joinButton.onclick = e => {
-    //e.preventDefault();
-
-    //if (!dom.nameInput.value) {
-        //dom.nameInput.parentElement.classList.add('error');
-    //} else {
-      //  enterChannel();
-    //}
-//}
