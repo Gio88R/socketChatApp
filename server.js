@@ -10,16 +10,18 @@ app.use(express.urlencoded({ extended: true }));
 var typing = false;
 var timeout = undefined;
 
-//const userNames = {};
+const usernames = {};
 const rooms = {};
+
 //test
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/lobby", (req, res) => {
+app.post("/lobby", (req, res) => {
+    const username = req.body.name;
     res.sendFile(__dirname + "/public/lobby.html");
-  });
+});
 
 app.post("/room", (req, res) => {
   if (rooms[req.body.room] != null) {
@@ -61,7 +63,7 @@ io.on("connection", (socket) => {
     });
   });
 
-  //typing
+  //typing...
   //https://stackoverflow.com/questions/16766488/socket-io-how-to-check-if-user-is-typing-and-broadcast-it-to-other-users
   socket.on("typing", (name) => {
         if(typing == false) {
@@ -79,8 +81,8 @@ io.on("connection", (socket) => {
   });
 });
 
-//timeout till typing
-function timeoutFunction(){
+//timeout-funktion till typing...
+function timeoutFunction (){
     typing = false;
 }
 
