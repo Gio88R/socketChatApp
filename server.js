@@ -12,6 +12,12 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+//
+app.get("/lobby", (req, res) => {
+  res.sendFile(__dirname + "/public/lobby.html");
+});
+
+///
 app.post("/room", (req, res) => {
   if (rooms[req.body.room] != null) {
     return res.redirect("/");
@@ -21,12 +27,25 @@ app.post("/room", (req, res) => {
   res.redirect(req.body.room);
   io.emit("room-created", req.body.room);
 });
-
+app.get("/room", (req, res) => {
+  const userName = req.query.userName;
+  const roomName = req.query.roomName; // Assuming you pass the roomName in the query parameter
+  // res.redirect(`/${roomName}?userName=${encodeURIComponent(userName)}`);
+  res.sendFile(
+    __dirname + `/${roomName}?userName=` + encodeURIComponent(userName)
+  );
+});
 app.get("/:room", (req, res) => {
-  if (rooms[req.params.room] == null) {
+  const roomName = req.params.room; // Get the room name from the URL parameter
+
+  if (rooms[roomName] == null) {
     return res.redirect("/");
   }
-  res.sendFile(__dirname + "/public/room.html");
+
+  const userName = req.query.userName; // Get the userName from the query parameter
+  const encodedUserName = encodeURIComponent(userName);
+
+  res.sendFile(__dirname + `/${roomName}?userName=${encodedUserName}`); // Redirect to the room URL with the userName parameter
 });
 
 server.listen(3000);
@@ -36,7 +55,7 @@ io.on("connection", (socket) => {
   socket.on("request-room-list", () => {
     socket.emit("roomList", Object.keys(rooms));
   });
-  socket.on("new-user", (room, name) => {
+  socket.on("new-user", (room, name, userName) => {
     socket.join(room);
     // displayRoomInfo();
     console.log(`Sockets in ${room}:`);

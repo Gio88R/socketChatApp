@@ -7,12 +7,27 @@ const messageInput = document.getElementById("message-input");
 const roomName = window.location.pathname.slice(1);
 
 //
+const userNameElement = document.getElementById("name");
+
+const userNameBtn = document.getElementById("userNameBtn");
+const userNameForm = document.getElementById("userNameForm");
+
+userNameForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const userName = userNameElement.value;
+  console.log(userName);
+  window.location.href = "/lobby?userName=" + encodeURIComponent(userName);
+});
+//
 
 //
 if (messageForm != null) {
-  const name = prompt("What is your name?");
+  const urlParams = new URLSearchParams(window.location.search);
+  const userName = urlParams.get("userName");
+  let name = userName;
+  // const name = prompt("What is your name?");
   appendMessage("You joined");
-  socket.emit("new-user", roomName, name);
+  socket.emit("new-user", roomName, name, userName);
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
