@@ -4,8 +4,11 @@ const roomContainer = document.getElementById("room-container");
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
 
-const roomName = window.location.pathname.slice(1); // Extract room name from the URL
+const roomName = window.location.pathname.slice(1);
 
+//
+
+//
 if (messageForm != null) {
   const name = prompt("What is your name?");
   appendMessage("You joined");
@@ -14,6 +17,7 @@ if (messageForm != null) {
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
+
     appendMessage(`You: ${message}`);
     socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
@@ -51,6 +55,34 @@ socket.on("user-disconnected", (name) => {
 
 function appendMessage(message) {
   const messageElement = document.createElement("div");
-  messageElement.innerText = message;
+  updateClock();
+  function updateClock() {
+    const date = new Date();
+    let time = date.toLocaleTimeString();
+    messageElement.innerText = time + " | " + message;
+  }
+
   messageContainer.append(messageElement);
 }
+
+socket.on("connect", () => {
+  socket.emit("request-room-list");
+  console.log("---");
+});
+socket.on("roomList", (roomList) => {
+  roomContainer.innerHTML = "";
+
+  roomList.forEach((room) => {
+    const roomElement = document.createElement("div");
+    roomElement.id = `room-${room}`;
+
+    const roomLink = document.createElement("a");
+    roomLink.href = `/${room}`;
+    roomLink.innerText = "Join Room";
+
+    roomElement.innerText = room;
+    roomElement.append(roomLink);
+
+    roomContainer.append(roomElement);
+  });
+});
