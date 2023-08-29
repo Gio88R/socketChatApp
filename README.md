@@ -26,5 +26,13 @@ Betygskrav:
 
 ## Starta projektet:
 
-(I projektmappen ska det finnas (utöver all kod) en README.md fil som innehåller en titel, beskrivning av uppgiften och vad som krävs för att bygga och starta projektet. Notera att om instruktioner för hur projektet byggs och startas inte finns eller om instruktionerna är felaktiga kommer uppgiften bli underkänd.)
+För att installera dependencies:
+- ### `npm install`
 
+För att köra projektet:
+- ### `npm run start`
+
+För att starta servern i utvecklingsläge:
+- ### `npm run dev`
+
+Appen öpppnas på adressen [http://localhost:3000](http://localhost:3000) i webbläsaren.
