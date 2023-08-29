@@ -56,10 +56,10 @@ io.on("connection", (socket) => {
 
   //typing...
   //https://stackoverflow.com/questions/16766488/socket-io-how-to-check-if-user-is-typing-and-broadcast-it-to-other-users
-  socket.on("typing", (name) => {
+  socket.on("typing", (room, name) => {
     if(typing == false) {
         typing = true;
-        socket.broadcast.emit("typing-event", name);
+        socket.to(room).emit("typing-event", room, name);
         timeout = setTimeout(timeoutFunction, 2500);
     };
 });

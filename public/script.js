@@ -15,7 +15,7 @@ if (messageForm != null) {
   
   //typing
   messageInput.addEventListener("keypress", () => {
-      socket.emit("typing", name);
+      socket.emit("typing", roomName, name);
     });
 
   messageForm.addEventListener("submit", (e) => {
