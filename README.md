@@ -18,7 +18,8 @@ Betygskrav:
 6. När en användare går med i ett nytt rum ska befintligt rum lämnas automatiskt. 
 7. Användare ska kunna skicka och läsa nya meddelanden i rummet de har gått med i 
 8. När en användare håller på att skriva ett meddelande skall det synas för alla andra i rummet. 
-9. Git & GitHub har använts. 10.Projektmappen innehåller en README.md fil (läs ovan för mer info). 
+9. Git & GitHub har använts. 
+10. Projektmappen innehåller en README.md fil (läs ovan för mer info). 
 11. Uppgiften lämnas in i tid!
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------

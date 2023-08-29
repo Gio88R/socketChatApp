@@ -50,7 +50,7 @@ socket.on("typing-event", (name) => {
     messageElement.setAttribute('id', 'typing') //ge diven id:et "typing"
     messageElement.innerText = `${name} is typing...`; //sätt div:ens innehåll till "Namn is typing..."
     messageContainer.append(messageElement); //lägg till diven i messageContainer
-    timeout = setTimeout(resetTyping, 2500); //ropa på funktionen som tar bort diven efter 2,5 sekunder
+    timeout = setTimeout(resetTyping, 1500); //ropa på funktionen som tar bort diven efter 1,5 sekunder
 });
 
 socket.on("chat-message", (data) => {

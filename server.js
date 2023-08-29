@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
     if(typing == false) {
         typing = true;
         socket.to(room).emit("typing-event", room, name);
-        timeout = setTimeout(timeoutFunction, 2500);
+        timeout = setTimeout(timeoutFunction, 1500);
     };
 });
 
