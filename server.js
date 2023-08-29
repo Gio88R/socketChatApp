@@ -11,7 +11,7 @@ var typing = false;
 var timeout = undefined;
 
 const rooms = {};
-const usernames = {};
+//const usernames = {};
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
@@ -44,7 +44,9 @@ io.on("connection", (socket) => {
     if (!rooms[room]) {
       rooms[room] = { users: {} };
     }
-
+    //namn plockas upp och skickar med att en användare kopplas upp och samtidigt läggs i en lista av användare. 
+    //men... uppkopplingen ska vara synlig för alla andra och namn på listan ska synas för alla... Hur lösa?
+    //måste ske på "new-user" och ska ske samtidigt som "user-connected"
     rooms[room].users[socket.id] = name;
     socket.to(room).emit("user-connected", name);
   });
@@ -61,7 +63,7 @@ io.on("connection", (socket) => {
   socket.on("typing", (room, name) => {
     if(typing == false) {
       typing = true;
-      socket.to(room).emit("typing-event", room, name);
+      socket.to(room).emit("typing-event", name);
       timeout = setTimeout(timeoutFunction, 1500);
     };
 });
