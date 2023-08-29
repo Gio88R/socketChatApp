@@ -3,6 +3,7 @@ const messageContainer = document.getElementById("message-container");
 const roomContainer = document.getElementById("room-container");
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
+const listOfUsers = document.getElementById("user-list");
 
 const roomName = window.location.pathname.slice(1); // Extract room name from the URL
 
@@ -15,8 +16,8 @@ if (messageForm != null) {
   
   //typing
   messageInput.addEventListener("keypress", () => {
-      socket.emit("typing", roomName, name);
-    });
+    socket.emit("typing", roomName, name);
+  });
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -25,6 +26,7 @@ if (messageForm != null) {
     socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
   });
+
   const disconnect = document.getElementById("disconnect");
   disconnect.addEventListener("click", () => {
     if (confirm(`Are you sure you want to leave room ${roomName}?`)) {
@@ -59,6 +61,7 @@ socket.on("chat-message", (data) => {
 
 socket.on("user-connected", (name) => {
   appendMessage(`${name} connected`);
+  userList(`${name}`);
 });
 
 socket.on("user-disconnected", (name) => {
@@ -67,8 +70,14 @@ socket.on("user-disconnected", (name) => {
 
 //typing...-funktion
 function resetTyping() {
-    const typingMessage = document.getElementById("typing"); //hitta ett element som har id:et "typing"
-    typingMessage.remove(); //ta bort elementet
+  const typingMessage = document.getElementById("typing"); //hitta ett element som har id:et "typing"
+  typingMessage.remove(); //ta bort elementet
+}
+
+function userList(names) {
+  const userList = document.createElement("li");
+  userList.innerText = names;
+  listOfUsers.append(userList);
 }
 
 function appendMessage(message) {

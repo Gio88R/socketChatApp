@@ -11,6 +11,7 @@ var typing = false;
 var timeout = undefined;
 
 const rooms = {};
+const usernames = {};
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
@@ -38,6 +39,7 @@ server.listen(3000);
 io.on("connection", (socket) => {
   socket.on("new-user", (room, name) => {
     socket.join(room);
+    //usernames[name] = name
     displayRoomInfo();
     if (!rooms[room]) {
       rooms[room] = { users: {} };
@@ -58,9 +60,9 @@ io.on("connection", (socket) => {
   //https://stackoverflow.com/questions/16766488/socket-io-how-to-check-if-user-is-typing-and-broadcast-it-to-other-users
   socket.on("typing", (room, name) => {
     if(typing == false) {
-        typing = true;
-        socket.to(room).emit("typing-event", room, name);
-        timeout = setTimeout(timeoutFunction, 1500);
+      typing = true;
+      socket.to(room).emit("typing-event", room, name);
+      timeout = setTimeout(timeoutFunction, 1500);
     };
 });
 
@@ -70,6 +72,7 @@ io.on("connection", (socket) => {
       delete rooms[room].users[socket.id];
     });
   });
+
   socket.on("leave-room", (roomName) => {
     console.log(`${socket.id} left room ${roomName}`);
     console.log(io.sockets.adapter.rooms);
@@ -79,7 +82,7 @@ io.on("connection", (socket) => {
 
 //timeout-funktion till typing...
 function timeoutFunction () {
-    typing = false;
+  typing = false;
 }
 
 function getUserRooms(socket) {
