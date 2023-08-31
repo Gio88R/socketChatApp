@@ -6,6 +6,10 @@ const io = require("socket.io")(server);
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
+//deklarerar inför typing-functionen
+var typing = false;
+var timeout = undefined;
+
 const rooms = {};
 //test
 app.get("/", (req, res) => {
@@ -56,6 +60,16 @@ io.on("connection", (socket) => {
     });
   });
 
+  //typing...
+  //https://stackoverflow.com/questions/16766488/socket-io-how-to-check-if-user-is-typing-and-broadcast-it-to-other-users
+  socket.on("typing", (room, name) => {
+    if(typing == false) {
+      typing = true;
+      socket.to(room).emit("typing-event", name);
+      timeout = setTimeout(timeoutFunction, 1500);
+    };
+});
+
   socket.on("disconnect", () => {
     getUserRooms(socket).forEach((room) => {
       socket.to(room).emit("user-disconnected", rooms[room].users[socket.id]);
@@ -82,6 +96,11 @@ function getUserRooms(socket) {
     if (room.users[socket.id] != null) names.push(name);
     return names;
   }, []);
+}
+
+//timeout-funktion till typing...
+function timeoutFunction () {
+  typing = false;
 }
 
 function displayRoomInfo() {
