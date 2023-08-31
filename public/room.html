@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat App</title>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        background-color: darkslategray;
+      }
+
+      #message-container {
+        width: 80%;
+        max-width: 100vw;
+        color: lightgoldenrodyellow;
+        font-family: "Raleway", sans-serif;
+        font-family: "Rubik", sans-serif;
+        overflow-y: scroll;
+        height: 90vh;
+        word-wrap: break-word;
+      }
+
+      #message-container div {
+        background-color: #2f4f4f;
+        padding: 5px;
+        border-right: 2px solid #283d3d;
+        border-left: 2px solid #283d3d;
+      }
+
+      #message-container div:nth-child(2n) {
+        background-color: #283d3d;
+      }
+
+      #send-container {
+        position: fixed;
+        padding-bottom: 30px;
+        bottom: 0;
+        background-color: white;
+        max-width: 1200px;
+        width: 80%;
+        display: flex;
+        gap: 10px;
+      }
+
+      #message-input {
+        flex-grow: 1;
+        background-color: darkslategrey;
+        color: lightgoldenrodyellow;
+        border: 2px groove lightgoldenrodyellow;
+        font-family: "Raleway", sans-serif;
+        font-family: "Rubik", sans-serif;
+        border-radius: 5px;
+      }
+
+      #send-container {
+        background-color: darkslategray;
+      }
+      button {
+        height: 30px;
+        background-color: darkslategrey;
+        color: lightgoldenrodyellow;
+        font-family: "Raleway", sans-serif;
+        font-family: "Rubik", sans-serif;
+        border: 2px groove lightgoldenrodyellow;
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #disconnect {
+        color: rgb(241, 93, 93);
+        border-color: rgb(241, 93, 93);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message-container"></div>
+    <form id="send-container">
+      <button type="button" id="disconnect">Disconnect</button>
+      <input type="text" id="message-input" />
+      <button type="submit" id="send-button">Send</button>
+    </form>
+  </body>
+</html>
