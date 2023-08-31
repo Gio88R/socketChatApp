@@ -101,7 +101,7 @@
     <div id="test">
       <h1>Socket.io Chat</h1>
       <form action="/room" method="POST">
-        <input name="room" type="text" required placeholder="Enter room name" />
+        <input name="room" type="text" placeholder="Enter room name" required pattern="^[^\såäöü]+$" title="No white space nor ÅÄÖ allowed in room name" />
         <button type="submit">Create Room</button>
       </form>
       <div id="room-container"></div>
