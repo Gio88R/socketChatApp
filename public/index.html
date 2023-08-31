@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Chat App</title>
+    <title>Socket.io Chat</title>
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script defer src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,7 +34,7 @@
     #room-container {
       display: flex;
     }
-    #test {
+    #roomPageContainer {
       flex-direction: column;
       display: flex;
       align-items: center;
@@ -98,10 +98,17 @@
     }
   </style>
   <body>
-    <div id="test">
+    <div id="roomPageContainer">
       <h1>Socket.io Chat</h1>
       <form action="/room" method="POST">
-        <input name="room" type="text" placeholder="Enter room name" required pattern="^[^\såäöü]+$" title="No white space nor ÅÄÖ allowed in room name" />
+        <input
+          name="room"
+          type="text"
+          placeholder="Enter room name"
+          required
+          pattern="^[^\såäöü]+$"
+          title="No white space nor ÅÄÖ allowed in room name"
+        />
         <button type="submit">Create Room</button>
       </form>
       <div id="room-container"></div>

@@ -8,15 +8,11 @@ const roomName = window.location.pathname.slice(1);
 
 var timeout = undefined;
 
-//
-
-//
 if (messageForm != null) {
   const name = prompt("What is your name?");
   appendMessage("You joined");
   socket.emit("new-user", roomName, name);
 
-  //typing
   messageInput.addEventListener("keypress", () => {
     socket.emit("typing", roomName, name);
   });
@@ -48,13 +44,12 @@ socket.on("room-created", (room) => {
   roomElement.append(roomLink);
 });
 
-//typing
 socket.on("typing-event", (name) => {
-  const messageElement = document.createElement("div"); //skapa en div
-  messageElement.setAttribute('id', 'typing') //ge diven id:et "typing"
-  messageElement.innerText = `${name} is typing...`; //sätt div:ens innehåll till "Namn is typing..."
-  messageContainer.append(messageElement); //lägg till diven i messageContainer
-  timeout = setTimeout(resetTyping, 1500); //ropa på funktionen som tar bort diven efter 1,5 sekunder
+  const messageElement = document.createElement("div");
+  messageElement.setAttribute("id", "typing");
+  messageElement.innerText = `${name} is typing...`;
+  messageContainer.append(messageElement);
+  timeout = setTimeout(resetTyping, 1500);
 });
 
 socket.on("chat-message", (data) => {
@@ -69,10 +64,9 @@ socket.on("user-disconnected", (name) => {
   appendMessage(`${name} disconnected`);
 });
 
-//typing...-funktion
 function resetTyping() {
-  const typingMessage = document.getElementById("typing"); //hitta ett element som har id:et "typing"
-  typingMessage.remove(); //ta bort elementet
+  const typingMessage = document.getElementById("typing");
+  typingMessage.remove();
 }
 
 function appendMessage(message) {
